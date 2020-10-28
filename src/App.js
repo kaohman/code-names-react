@@ -5,6 +5,7 @@ import { getGameboardWords } from './thunks/getGameboardWords';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SpymasterClue from './components/SpymasterClue/SpymasterClue';
+import Team from './components/Team/Team';
 
 const App = ({ getGameboardWords, isLoading }) => {
 
@@ -17,12 +18,18 @@ const App = ({ getGameboardWords, isLoading }) => {
       <header>
         <h1>React Code Names</h1>
       </header>
-      <div>
-        <h4 className="subheader">Turn info...</h4>
-      </div>
-      { !isLoading && <CardContainer /> }
-      <div>
-        <SpymasterClue />
+      <div className="main-content">
+        <Team teamName="Team 1" />
+        <div>
+          <div>
+            <h4 className="subheader">Turn info...</h4>
+          </div>
+          { !isLoading && <CardContainer /> }
+          <div>
+            <SpymasterClue />
+          </div>
+        </div>
+        <Team teamName="Team 2" />
       </div>
     </div>
   );
