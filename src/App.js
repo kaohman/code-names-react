@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import './App.scss';
+import CardContainer from './components/CardContainer/CardContainer';
+import { getGameboardWords } from './thunks/getGameboardWords';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-function App() {
+function App({ getGameboardWords }) {
+
+  useEffect(() => {
+    getGameboardWords(25);
+  }, [getGameboardWords]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <h1>React Code Names</h1>
       </header>
+      <CardContainer />
     </div>
   );
 }
 
-export default App;
+export const mapDispatchToProps = dispatch => ({
+  getGameboardWords: total => dispatch(getGameboardWords(total)),
+});
+
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(App)
+);
