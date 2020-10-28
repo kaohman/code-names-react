@@ -1,9 +1,9 @@
 import './Card.scss';
 
-function Card({ word }) {
+const Card = ({ word }) => {
   return (
     <div className="game-card">
-      { word }
+      <h3>{ word }</h3>
     </div>
   );
 }

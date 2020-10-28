@@ -4,8 +4,9 @@ import CardContainer from './components/CardContainer/CardContainer';
 import { getGameboardWords } from './thunks/getGameboardWords';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import SpymasterClue from './components/SpymasterClue/SpymasterClue';
 
-function App({ getGameboardWords }) {
+const App = ({ getGameboardWords, isLoading }) => {
 
   useEffect(() => {
     getGameboardWords(25);
@@ -16,10 +17,20 @@ function App({ getGameboardWords }) {
       <header>
         <h1>React Code Names</h1>
       </header>
-      <CardContainer />
+      <div>
+        <h4 className="subheader">Turn info...</h4>
+      </div>
+      { !isLoading && <CardContainer /> }
+      <div>
+        <SpymasterClue />
+      </div>
     </div>
   );
 }
+
+export const mapStateToProps = state => ({
+  isLoading: state.isLoading,
+});
 
 export const mapDispatchToProps = dispatch => ({
   getGameboardWords: total => dispatch(getGameboardWords(total)),
@@ -27,7 +38,7 @@ export const mapDispatchToProps = dispatch => ({
 
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(App)
 );

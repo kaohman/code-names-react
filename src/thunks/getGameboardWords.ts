@@ -1,9 +1,10 @@
-import { setGameboardWords } from '../actions';
+import { setGameboardWords, setLoading } from '../actions';
 import { words } from '../data/words';
 
 export const getGameboardWords = (total: number) => {
-  return async (dispatch: (arg0: { type: string; words: any; }) => void) => {
+  return async (dispatch: (arg0: { type: string; isLoading?: boolean; words?: string[]; }) => void) => {
     try {
+      dispatch(setLoading(true));
       let randomIndices: number[] = [];
       for (let i = 0; i < total; i++) {
         let value = Math.floor(Math.random() * total);
@@ -18,5 +19,6 @@ export const getGameboardWords = (total: number) => {
       dispatch(setGameboardWords(randomWords));
     } catch (error) {
     }
+    dispatch(setLoading(false));
   }
 }

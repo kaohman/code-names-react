@@ -1,5 +1,12 @@
 .game-card {
-  height: 150px;
-  width: 200px;
+  height: 100px;
+  width: 150px;
   border: 1px solid black;
+  margin: 10px;
+
+  h3 {
+    margin-top: 35px;
+    text-align: center;
+    text-transform: uppercase;
+  }
 }
